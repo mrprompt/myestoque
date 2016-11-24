@@ -47,6 +47,12 @@ and open the template in the editor.
         echo "<hr>";
         echo "<h1>Conta</h1>";
         
+        $conta = new Conta('Principal', 'Conta Corrente', 100.0);
+        //$conta->criarConta($conta);
+                
+        $conta->mostraSaldo();
+        var_dump($conta->saldo());
+        
         
         
         
