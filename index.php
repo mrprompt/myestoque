@@ -13,6 +13,7 @@ and open the template in the editor.
         <?php
         require('./_app/Config.inc.php');
         
+        echo "<h1>Estoque</h1>";
         
         $produto = new Produto('Chinelo', 'Calçado', 'Nike', 5, 20);
         //$produto->cadastraProduto($produto); 
@@ -28,12 +29,26 @@ and open the template in the editor.
             echo "Não tem produtos inseridos no estoque";
         endif;
         
-        //$produto->movimentacaoProduto(9, 'bla bla bla', 2, 39.90, 'saida');
-        echo "<hr>";
+        //$produto->movimentacaoProduto(9, 'bla bla bla', 2, 39.90, 'entrada');
         
-        $preco = 5.80;
-        $val = 7 * $preco;
-        var_dump($produto->Real($val));
+        echo "<hr>";
+        echo "<h1>Movimentação</h1>";
+        
+        $leMovimentacao = new Read();
+        $leMovimentacao->ExeRead('movimentacao', 'INNER JOIN estoque LIMIT :limit' ,'limit=3');
+        //SELECT * FROM movimentacao INNER JOIN estoque
+        //"R$ " . number_format($m['vlr_mov'], '2', '.', ',')
+        if($leMovimentacao->getRowCount() >= 1):            
+            foreach ($leMovimentacao->getResult() as $m):
+                echo $m['nom_pro'] . " | " . $m['qtd_mov'] . " | " . "R$ " . number_format($m['vlr_mov'], '2', '.', ',') . " | " ."<br/>";
+            endforeach;
+        endif;
+        
+        echo "<hr>";
+        echo "<h1>Conta</h1>";
+        
+        
+        
         
         
         ?>

@@ -77,6 +77,16 @@ class Produto {
         $ArrUpdate = ['est_atu_pro' => $atual - $Qtd];
         $update->ExeUpdate('estoque', $ArrUpdate, "WHERE cod_pro = :cod", 'cod=' . $Codigo);
     }
+    
+    public function editarProduto($Codigo,$ArrUpdate){
+        $update = new Update();
+        $update->ExeUpdate('estoque', $ArrUpdate, "WHERE cod_pro = :cod", 'cod=' . $Codigo);
+    }
+    
+    public function excluirProduto($Codigo) {
+        $delete = new Delete();
+        $delete->ExeDelete('estoque', "WHERE cod_pro = :cod", 'cod=' . $Codigo);
+    }
 
     public function Real($Valor) {
         return "R$ " . number_format($Valor, '2', '.', ',');
