@@ -14,11 +14,8 @@ class ContatoJuridico extends Contato{
         $this->Inscricao_estadual = $Inscricao_estadual;
     }
     
-    public function adicionarContato(Contato $c) {
-        $create = new Create();
+    public function adicionarContato($Arr = null, $c = null) {
         $ArrContato = [        
-            'nom_cnt' => ' ',
-            'cpf_cnt' => ' ',
             'nom_fnt_cnt' => $this->Nome_fantasia,
             'raz_soc_cnt' => $this->Razao_social,
             'cnpj_cnt' => $this->CNPJ,
@@ -36,17 +33,14 @@ class ContatoJuridico extends Contato{
             'des_cnt' => $this->Descricao,
             'tip_cnt' => $this->Tipo_contato
         ];
-        $create->ExeCreate('contatos', $ArrContato);
+        parent::adicionarContato($ArrContato);        
     }
     
     public function editarContato($Codigo,$ArrUpdate){
-        $update = new Update();
-        $update->ExeUpdate('contatos', $ArrUpdate, "WHERE cod_cnt = :cod", 'cod=' . $Codigo);
+        parent::editarContato($Codigo, $ArrUpdate);
     }
     
     public function excluirContato($Codigo) {
-        $delete = new Delete();
-        $delete->ExeDelete('contatos', "WHERE cod_cnt = :cod", 'cod=' . $Codigo);
+        parent::excluirContato($Codigo);
     }
-
 }

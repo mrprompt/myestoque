@@ -11,15 +11,10 @@ class ContatoFisico extends Contato {
         $this->CPF = $CPF;
     }
 
-    public function adicionarContato(Contato $c) {
-        $create = new Create();
+    public function adicionarContato($Arr = null, $c = null) {
         $ArrContato = [        
             'nom_cnt' => $this->Nome,
-            'cpf_cnt' => $this->CPF,
-            'nom_fnt_cnt' => ' ',
-            'raz_soc_cnt' => ' ',
-            'cnpj_cnt' => ' ',
-            'ins_est_cnt' =>' ',
+            'cpf_cnt' => $this->CPF,            
             'email_cnt' => $this->Email,
             'tel_cnt' => $this->Telelefone,
             'end_cnt' => $this->Endereco,
@@ -33,16 +28,14 @@ class ContatoFisico extends Contato {
             'des_cnt' => $this->Descricao,
             'tip_cnt' => $this->Tipo_contato
         ];
-        $create->ExeCreate('contatos', $ArrContato);
+        parent::adicionarContato($ArrContato);        
     }
     
     public function editarContato($Codigo,$ArrUpdate){
-        $update = new Update();
-        $update->ExeUpdate('contatos', $ArrUpdate, "WHERE cod_cnt = :cod", 'cod=' . $Codigo);
+        parent::editarContato($Codigo, $ArrUpdate);
     }
     
     public function excluirContato($Codigo) {
-        $delete = new Delete();
-        $delete->ExeDelete('contatos', "WHERE cod_cnt = :cod", 'cod=' . $Codigo);
-    }
+        parent::excluirContato($Codigo);
+    } 
 }

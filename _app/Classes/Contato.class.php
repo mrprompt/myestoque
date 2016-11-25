@@ -29,6 +29,20 @@ abstract class Contato {
         $this->Tipo_contato = $Tipo_contato;
     }
     
+    public function adicionarContato($Arr = null, $c = null ) {
+        $create = new Create();
+        $create->ExeCreate('contatos', $Arr);
+    }
+    
+     public function editarContato($Codigo,$ArrUpdate){
+        $update = new Update();
+        $update->ExeUpdate('contatos', $ArrUpdate, "WHERE cod_cnt = :cod", 'cod=' . $Codigo);
+    }
+    
+    public function excluirContato($Codigo) {
+        $delete = new Delete();
+        $delete->ExeDelete('contatos', "WHERE cod_cnt = :cod", 'cod=' . $Codigo);
+    }
     
 
 }
