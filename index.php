@@ -53,7 +53,12 @@ and open the template in the editor.
         $conta->mostraSaldo();
         var_dump($conta->saldo());
         
+        echo "<hr>";
+        echo "<h1>Contatos</h1>";
         
+        //$contato = new ContatoFisico('Fred', '12312312311', 'fred@teste.com', '99999-9999', 'Rua dois', '8', 'casa', 'centro', '45678-000', 'MG', 'Congonhas','08/08/08', 'bla bla bla','Cliente');
+        //$cnt = new ContatoJuridico('loja', 'lojinha', '12345678787', '12345689', 'lojinha@venda.com', '34567678', 'rua', '3', 'casa', 'centro', '34567890', 1, 23, '23/09/1990', 'bla bla', 'Fornecedor');
+        //$cnt->adicionarContato($cnt);
         
         
         
