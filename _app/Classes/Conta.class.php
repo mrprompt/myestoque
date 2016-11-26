@@ -6,7 +6,7 @@ class Conta {
     private $Tip_con;
     private $Sal_con;
 
-    function __construct($Nom_con, $Tip_con, $Sal_con) {
+    function __construct($Nom_con = null, $Tip_con = null, $Sal_con = null) {
         $this->Nom_con = $Nom_con;
         $this->Tip_con = $Tip_con;
         $this->Sal_con = $Sal_con;

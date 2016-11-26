@@ -9,17 +9,19 @@ class Produto {
     private $Est_min_pro;
     private $Est_ini_pro;
     private $Est_atu_pro;
+    private $Val_ent_pro;
 
-    function __construct($Nom_pro, $Cat_pro, $For_pro, $Est_min_pro, $Est_ini_pro) {
+    function __construct($Nom_pro = null, $Cat_pro = null, $For_pro = null, $Est_min_pro = null, $Est_ini_pro = null, $Val_ent_pro = null) {
         $this->Nom_pro = $Nom_pro;
         $this->Cat_pro = $Cat_pro;
         $this->For_pro = $For_pro;
         $this->Est_min_pro = $Est_min_pro;
         $this->Est_ini_pro = $Est_ini_pro;
         $this->Est_atu_pro = $Est_ini_pro;
+        $this->Val_ent_pro = $Val_ent_pro;
     }
 
-    public function cadastraProduto(Produto $p) {
+    public function cadastraProdutoNoEstoque() {
         $create = new Create();
         $ArrProduto = [
             'nom_pro' => $this->Nom_pro,
@@ -27,32 +29,15 @@ class Produto {
             'for_pro' => $this->For_pro,
             'est_min_pro' => $this->Est_min_pro,
             'est_ini_pro' => $this->Est_ini_pro,
-            'est_atu_pro' => $this->Est_atu_pro
+            'est_atu_pro' => $this->Est_atu_pro,
+            'val_ent_pro' => $this->Val_ent_pro
         ];
         $create->ExeCreate('estoque', $ArrProduto);
+        $conta = new Conta();
+        $conta->depositar($this->Est_ini_pro * $this->Val_ent_pro);
     }
 
-    public function movimentacaoProduto($cod_pro, $descrição, $qtd, $valor, $tipo_mov) {
-        $create = new Create();
-        $ArrProduto = [
-            'cod_pro' => $cod_pro,
-            'des_mov' => $descrição,
-            'qtd_mov' => $qtd,
-            'vlr_mov' => $valor,
-            'tipo_mov' => $tipo_mov
-        ];
-        $create->ExeCreate('movimentacao', $ArrProduto);
-
-        if ($tipo_mov == 'entrada'):
-            $this->adicionarProduto($cod_pro, $qtd);
-        elseif ($tipo_mov == 'saida'):
-            $this->retirarProduto($cod_pro, $qtd);
-        else:
-            echo "Nao encontrado";
-        endif;
-    }
-
-    public function adicionarProduto($Codigo, $Qtd) {
+    public function adicionarProdutoNoEstoque($Codigo, $Qtd) {
         $read = new Read();
         $read->ExeRead('estoque');
 
@@ -65,7 +50,7 @@ class Produto {
         $update->ExeUpdate('estoque', $ArrUpdate, "WHERE cod_pro = :cod", 'cod=' . $Codigo);
     }
 
-    public function retirarProduto($Codigo, $Qtd) {
+    public function retirarProdutoNoEstoque($Codigo, $Qtd) {
         $read = new Read();
         $read->ExeRead('estoque');
 
@@ -77,19 +62,14 @@ class Produto {
         $ArrUpdate = ['est_atu_pro' => $atual - $Qtd];
         $update->ExeUpdate('estoque', $ArrUpdate, "WHERE cod_pro = :cod", 'cod=' . $Codigo);
     }
-    
-    public function editarProduto($Codigo,$ArrUpdate){
+
+    public function editarProduto($Codigo, $ArrUpdate) {
         $update = new Update();
         $update->ExeUpdate('estoque', $ArrUpdate, "WHERE cod_pro = :cod", 'cod=' . $Codigo);
     }
-    
+
     public function excluirProduto($Codigo) {
         $delete = new Delete();
         $delete->ExeDelete('estoque', "WHERE cod_pro = :cod", 'cod=' . $Codigo);
     }
-
-    public function Real($Valor) {
-        return "R$ " . number_format($Valor, '2', '.', ',');
-    }
-
 }

@@ -15,8 +15,8 @@ and open the template in the editor.
         
         echo "<h1>Estoque</h1>";
         
-        $produto = new Produto('Chinelo', 'Calçado', 'Nike', 5, 20);
-        //$produto->cadastraProduto($produto); 
+        $produto = new Produto('Blusa', 'Blusa', 'Nike', 5, 10,7);
+        //$produto->cadastraProdutoNoEstoque($produto); 
            
         $leProdutos = new Read();
         $leProdutos->ExeRead('estoque');
@@ -32,10 +32,10 @@ and open the template in the editor.
         //$produto->movimentacaoProduto(9, 'bla bla bla', 2, 39.90, 'entrada');
         
         echo "<hr>";
-        echo "<h1>Movimentação</h1>";
+        echo "<h1>Estoque Movimentação</h1>";
         
         $leMovimentacao = new Read();
-        $leMovimentacao->ExeRead('movimentacao', 'INNER JOIN estoque LIMIT :limit' ,'limit=3');
+        $leMovimentacao->ExeRead('estoque_movimentacao', 'INNER JOIN estoque LIMIT :limit' ,'limit=3');
         //SELECT * FROM movimentacao INNER JOIN estoque
         //"R$ " . number_format($m['vlr_mov'], '2', '.', ',')
         if($leMovimentacao->getRowCount() >= 1):            
@@ -67,6 +67,18 @@ and open the template in the editor.
         //$contato->excluirContato(7);
         //$cnt = new ContatoJuridico('custela', 'lojinha', '12345678787', '12345689', 'lojinha@venda.com', '34567678', 'rua', '3', 'casa', 'centro', '34567890', 1, 23, '23/09/1990', 'bla bla', 'Fornecedor');
         //$cnt->adicionarContato($cnt);
+        
+        //$mov = new Movimentacao();
+        //$mov->movimentaProduto(9, 'comprei', 1, 70, 'saida');
+        
+        //$teste = new Produto('teste', 'testando', 'testador', 10, 100);
+        //$teste->cadastraProdutoNoEstoque($teste);
+        
+        //$produto->
+        
+        //$mov = new Movimentacao('02/06/2016', 'venda olx', 'raul', 30.00, 'vendas','pessoas');
+        //$mov->movimentaCaixa($mov);
+        
         ?>
         
         
