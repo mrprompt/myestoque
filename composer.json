@@ -1,0 +1,13 @@
+{
+    "name": "Myestoque",
+    "description": "Breve descrição do que a aplicação faz",
+    "authors": [
+        {
+            "name": "Frederico Drumond",
+            "email": "fredrumond@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.2.8"
+    }
+}
