@@ -15,4 +15,4 @@ TO DO                       | DOING                    | DONE
 
 #MODELAGEM BANCO
 ###Print modelagem
-![alt tag]()
+![alt tag](https://github.com/Fredrumond/myestoque/blob/master/banco/diagrama.png)
